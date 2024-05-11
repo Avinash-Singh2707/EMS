@@ -1,0 +1,230 @@
+﻿@*@model IEnumerable<EMS.Models.Employee>
+
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Emp_First_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Emp_Last_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Emp_Date_of_Birth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Emp_Date_of_Joining)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Emp_Designation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Emp_Salary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Emp_Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Emp_Marital_Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Emp_Home_Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Emp_Contact_Num)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department.Dept_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grade_master.Description)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp_First_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp_Last_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp_Date_of_Birth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp_Date_of_Joining)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp_Designation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp_Salary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp_Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp_Marital_Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp_Home_Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp_Contact_Num)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.Dept_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grade_master.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Emp_ID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Emp_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Emp_ID })
+            </td>
+        </tr>
+    }
+
+    </table>*@
+
+@model List<EMS.Models.Employee>
+
+@{
+    Layout = "~/Views/Shared/_EmpLayout.cshtml";
+    var grid = new WebGrid(canPage: true, rowsPerPage: 2);
+    grid.Bind(source: Model, rowCount: ViewBag.TotalRows, autoSortAndPage: false);
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div class="container">
+        <h2>Employees List</h2>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="#" class="navbar-brand">Search</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    @using (Html.BeginForm("index", "Employees", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+                    {
+                        <div class="form-group">
+                            <input type="text" name="search" value="@ViewBag.search" class="form-control" placeholder="search" />
+                        </div>
+                        <button type="submit" value="Search" class="btn btn-success">Search</button>
+                    }
+                </div>
+
+            </div>
+
+        </nav>
+
+        @if (TempData["AlertMessage"] != null)
+        {
+            <div id="alertMessage" class="alert alert-success">
+                <strong>Sucess !</strong>@TempData["AlertMessage"]
+                <button type="button" class="close" data-dismiss="alert">
+                    <spam>&times;</spam>
+                </button>
+            </div>
+        }
+
+
+
+
+
+
+        <p>
+            @Html.ActionLink("Add New Employee", "Create", null, new { @class = "btn btn-primary" })
+        </p>
+        <div>
+            @grid.Table(
+                tableStyle: "table table-responsive table-bordered",
+                columns: grid.Columns(
+                     grid.Column(columnName: "Emp_ID", header: "EID"),
+                    grid.Column(columnName: "Emp_First_Name", header: "First Name"),
+                    grid.Column(columnName: "Emp_Last_Name", header: "Last Name"),
+                    grid.Column(columnName: "Emp_Date_of_Birth", header: "DOB", format: (item) => item.Emp_Date_of_Birth.ToString("dd-MM-yyyy")),
+                    grid.Column(columnName: "Emp_Date_of_Joining", header: "DOJ", format: (item) => item.Emp_Date_of_Joining.ToString("dd-MM-yyyy")),
+                    //grid.Column(columnName: "Emp_Grade", header: "DepartmentID"),
+                    grid.Column(columnName: "Emp_Designation", header: "Designation"),
+                    grid.Column(columnName: "Emp_Salary", header: "Salary"),
+                    grid.Column(columnName: "Emp_Gender", header: "Gender"),
+                    //grid.Column(columnName: "Emp_Marital_Status", header: "Martial-Status"),
+                    grid.Column(columnName: "Emp_Home_Address", header: "Address"),
+                    grid.Column(columnName: "Emp_Contact_Num", header: "Mobile-Number"),
+
+                     grid.Column(header: "Actions", format: @<text>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Emp_ID }, new { @class = "btn btn-primary" })
+                            <text> | </text>
+                            @Html.ActionLink("Details", "Details", new { id = item.Emp_ID }, new { @class = "btn btn-info" })
+                            <text> | </text>
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Emp_ID }, new { @class = "btn btn-danger" })
+                    </text>)
+
+
+  )
+
+
+)
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                    @grid.PagerList(mode: WebGridPagerModes.All, paginationStyle: "pagination pagination-small pagination-right")
+                </div>
+            </div>
+
+
+
+            @Html.Hidden("dir", grid.SortDirection)
+            @Html.Hidden("col", grid.SortColumn)
+
+
+
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.1.1.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            try {
+                var dir = $('#dir').val();
+                var col = $('#col').val();
+                var header = $("th a[href*=" + col + "]");
+                if (dir == "Ascending") {
+                    header.text(header.text() + "  ▲")
+                }
+                if (dir == "Descending") {
+                    header.text(header.text() + "  ▼");
+                }
+
+            } catch (e) {
+
+            }
+        })
+
+
+    </script>
+
+</body>
+</html>

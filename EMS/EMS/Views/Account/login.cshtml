@@ -1,0 +1,92 @@
+﻿@model EMS.Models.Admin
+@{
+    ViewBag.Title = "login";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        body {
+            /* background-color: #f5f5f5;*/
+            background: linear-gradient(to bottom, #4ca1af, #c4e0e5);
+            font-family: Arial, sans-serif;
+        }
+
+
+
+        .login-container {
+            margin: auto;
+            width: 300px;
+            margin-top: 100px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+        }
+
+        .login-heading {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+            .btn-login:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2 class="login-heading">Admin Login</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                @Html.LabelFor(model => model.AdminId, htmlAttributes: new { @class = "control-label" })
+                @Html.PasswordFor(model => model.AdminId, new { @class = "form-control", placeholder = "Enter Admin ID", required = "required" })
+                @Html.ValidationMessageFor(model => model.AdminId, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.AdminPassword, htmlAttributes: new { @class = "control-label" })
+                @Html.PasswordFor(model => model.AdminPassword, new { @class = "form-control", placeholder = "Enter Password", required = "required" })
+                @Html.ValidationMessageFor(model => model.AdminPassword, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn-login">Login</button>
+            </div>
+        }
+    </div>
+    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+    }
+</body>
+</html>
+
+

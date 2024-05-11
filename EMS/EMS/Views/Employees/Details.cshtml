@@ -1,0 +1,224 @@
+﻿@*@model EMS.Models.Employee
+
+    @{
+        ViewBag.Title = "Details";
+    }
+
+    <h2>Details</h2>
+
+    <div>
+        <h4>Employee</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_First_Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_First_Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_Last_Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_Last_Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_Date_of_Birth)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_Date_of_Birth)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_Date_of_Joining)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_Date_of_Joining)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_Designation)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_Designation)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_Salary)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_Salary)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_Gender)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_Gender)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_Marital_Status)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_Marital_Status)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_Home_Address)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_Home_Address)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_Contact_Num)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_Contact_Num)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Department.Dept_Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Department.Dept_Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Grade_master.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Grade_master.Description)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Emp_ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
+
+
+
+@model EMS.Models.Employee
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    /* Custom CSS for styling */
+    .details-container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .details-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+        .details-header h2 {
+            font-size: 24px;
+            color: #333;
+        }
+
+    .details-list dt {
+        font-weight: bold;
+        color: #555;
+    }
+
+    .details-list dd {
+        margin-left: 0;
+        color: #777;
+    }
+
+    .details-links {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+        .details-links a {
+            margin-right: 10px;
+            padding: 8px 20px;
+            color: #fff;
+            background-color: #007bff;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+            .details-links a:hover {
+                background-color: #0056b3;
+            }
+</style>
+
+<h2 class="text-center">Employee Details</h2>
+
+<div class="details-container">
+    <dl class="details-list">
+
+        @*<dt>@Html.DisplayNameFor(model => model.Emp_First_Name)</dt>*@
+        <dt>First Name</dt>
+        <dd>@Html.DisplayFor(model => model.Emp_First_Name)</dd>
+
+        <dt>Last Name</dt>
+        <dd>@Html.DisplayFor(model => model.Emp_Last_Name)</dd>
+
+        <dt>DOB</dt>
+        <dd>@Html.DisplayFor(model => model.Emp_Date_of_Birth)</dd>
+
+        <dt>DOJ</dt>
+        <dd>@Html.DisplayFor(model => model.Emp_Date_of_Joining)</dd>
+
+        <dt>Designation</dt>
+        <dd>@Html.DisplayFor(model => model.Emp_Designation)</dd>
+
+        <dt>Salary</dt>
+        <dd>@Html.DisplayFor(model => model.Emp_Salary)</dd>
+
+        <dt>Gender</dt>
+        <dd>@Html.DisplayFor(model => model.Emp_Gender)</dd>
+
+        <dt>Martial-Status</dt>
+        <dd>@Html.DisplayFor(model => model.Emp_Marital_Status)</dd>
+
+        <dt>Home Address</dt>
+        <dd>@Html.DisplayFor(model => model.Emp_Home_Address)</dd>
+
+        <dt>Contact Number</dt>
+        <dd>@Html.DisplayFor(model => model.Emp_Contact_Num)</dd>
+
+        <dt>Department Name</dt>
+        <dd>@Html.DisplayFor(model => model.Department.Dept_Name)</dd>
+
+        @*<dt>@Html.DisplayNameFor(model => model.Grade_master.Description)</dt>
+            <dd>@Html.DisplayFor(model => model.Grade_master.Description)</dd>*@
+    </dl>
+</div>
+
+<div class="text-center details-links">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Emp_ID }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-secondary" })
+</div>

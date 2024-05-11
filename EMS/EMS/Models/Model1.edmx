@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EmpDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EmpDatabase.dbo.Admin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminId" />
+            <PropertyRef Name="AdminPassword" />
+          </Key>
+          <Property Name="AdminId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdminPassword" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Dept_ID" />
+          </Key>
+          <Property Name="Dept_ID" Type="int" Nullable="false" />
+          <Property Name="Dept_Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Emp_ID" />
+          </Key>
+          <Property Name="Emp_ID" Type="int" Nullable="false" />
+          <Property Name="Emp_First_Name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Emp_Last_Name" Type="varchar" MaxLength="25" />
+          <Property Name="Emp_Date_of_Birth" Type="date" />
+          <Property Name="Emp_Date_of_Joining" Type="date" />
+          <Property Name="Emp_Dept_ID" Type="int" />
+          <Property Name="Emp_Grade" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Emp_Designation" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Salary" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Emp_Gender" Type="varchar" MaxLength="10" />
+          <Property Name="Emp_Marital_Status" Type="varchar" MaxLength="20" />
+          <Property Name="Emp_Home_Address" Type="varchar" MaxLength="255" />
+          <Property Name="Emp_Contact_Num" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Grade_master">
+          <Key>
+            <PropertyRef Name="Grade_Code" />
+          </Key>
+          <Property Name="Grade_Code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Min_Salary" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Max_Salary" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EmpDatabase.dbo.Holiday' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Holiday">
+          <Key>
+            <PropertyRef Name="HolidayID" />
+            <PropertyRef Name="HolidayName" />
+            <PropertyRef Name="HolidayDate" />
+          </Key>
+          <Property Name="HolidayID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HolidayName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="HolidayDate" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Employee__Emp_De__3F466844">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Dept_ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Emp_Dept_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__Emp_Gr__403A8C7D">
+          <End Role="Grade_master" Type="Self.Grade_master" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade_master">
+              <PropertyRef Name="Grade_Code" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Emp_Grade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmpDatabaseModelStoreContainer">
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grade_master" EntityType="Self.Grade_master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Admin" EntityType="Self.Admin" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Admin].[AdminId] AS [AdminId], 
+    [Admin].[AdminPassword] AS [AdminPassword]
+    FROM [dbo].[Admin] AS [Admin]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Holiday" EntityType="Self.Holiday" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Holiday].[HolidayID] AS [HolidayID], 
+    [Holiday].[HolidayName] AS [HolidayName], 
+    [Holiday].[HolidayDate] AS [HolidayDate]
+    FROM [dbo].[Holiday] AS [Holiday]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Employee__Emp_De__3F466844" Association="Self.FK__Employee__Emp_De__3F466844">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Emp_Gr__403A8C7D" Association="Self.FK__Employee__Emp_Gr__403A8C7D">
+            <End Role="Grade_master" EntitySet="Grade_master" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EmpDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Dept_ID" />
+          </Key>
+          <Property Name="Dept_ID" Type="Int32" Nullable="false" />
+          <Property Name="Dept_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employee__Emp_De__3F466844" FromRole="Department" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Emp_ID" />
+          </Key>
+          <Property Name="Emp_ID" Type="Int32" Nullable="false" />
+          <Property Name="Emp_First_Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Emp_Last_Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Date_of_Birth" Type="DateTime" Precision="0" />
+          <Property Name="Emp_Date_of_Joining" Type="DateTime" Precision="0" />
+          <Property Name="Emp_Dept_ID" Type="Int32" />
+          <Property Name="Emp_Grade" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Emp_Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Salary" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Emp_Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Marital_Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Home_Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Contact_Num" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__Employee__Emp_De__3F466844" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="Grade_master" Relationship="Self.FK__Employee__Emp_Gr__403A8C7D" FromRole="Employee" ToRole="Grade_master" />
+        </EntityType>
+        <EntityType Name="Grade_master">
+          <Key>
+            <PropertyRef Name="Grade_Code" />
+          </Key>
+          <Property Name="Grade_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Min_Salary" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Max_Salary" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employee__Emp_Gr__403A8C7D" FromRole="Grade_master" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminId" />
+            <PropertyRef Name="AdminPassword" />
+          </Key>
+          <Property Name="AdminId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AdminPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Holiday">
+          <Key>
+            <PropertyRef Name="HolidayID" />
+            <PropertyRef Name="HolidayName" />
+            <PropertyRef Name="HolidayDate" />
+          </Key>
+          <Property Name="HolidayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HolidayName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HolidayDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <Association Name="FK__Employee__Emp_De__3F466844">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Dept_ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Emp_Dept_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__Emp_Gr__403A8C7D">
+          <End Role="Grade_master" Type="Self.Grade_master" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade_master">
+              <PropertyRef Name="Grade_Code" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Emp_Grade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmpDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Grade_master" EntityType="Self.Grade_master" />
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Holidays" EntityType="Self.Holiday" />
+          <AssociationSet Name="FK__Employee__Emp_De__3F466844" Association="Self.FK__Employee__Emp_De__3F466844">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Emp_Gr__403A8C7D" Association="Self.FK__Employee__Emp_Gr__403A8C7D">
+            <End Role="Grade_master" EntitySet="Grade_master" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EmpDatabaseModelStoreContainer" CdmEntityContainer="EmpDatabaseEntities">
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="EmpDatabaseModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="Dept_ID" ColumnName="Dept_ID" />
+                <ScalarProperty Name="Dept_Name" ColumnName="Dept_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="EmpDatabaseModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Emp_ID" ColumnName="Emp_ID" />
+                <ScalarProperty Name="Emp_First_Name" ColumnName="Emp_First_Name" />
+                <ScalarProperty Name="Emp_Last_Name" ColumnName="Emp_Last_Name" />
+                <ScalarProperty Name="Emp_Date_of_Birth" ColumnName="Emp_Date_of_Birth" />
+                <ScalarProperty Name="Emp_Date_of_Joining" ColumnName="Emp_Date_of_Joining" />
+                <ScalarProperty Name="Emp_Dept_ID" ColumnName="Emp_Dept_ID" />
+                <ScalarProperty Name="Emp_Grade" ColumnName="Emp_Grade" />
+                <ScalarProperty Name="Emp_Designation" ColumnName="Emp_Designation" />
+                <ScalarProperty Name="Emp_Salary" ColumnName="Emp_Salary" />
+                <ScalarProperty Name="Emp_Gender" ColumnName="Emp_Gender" />
+                <ScalarProperty Name="Emp_Marital_Status" ColumnName="Emp_Marital_Status" />
+                <ScalarProperty Name="Emp_Home_Address" ColumnName="Emp_Home_Address" />
+                <ScalarProperty Name="Emp_Contact_Num" ColumnName="Emp_Contact_Num" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grade_master">
+            <EntityTypeMapping TypeName="EmpDatabaseModel.Grade_master">
+              <MappingFragment StoreEntitySet="Grade_master">
+                <ScalarProperty Name="Grade_Code" ColumnName="Grade_Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Min_Salary" ColumnName="Min_Salary" />
+                <ScalarProperty Name="Max_Salary" ColumnName="Max_Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="EmpDatabaseModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="AdminPassword" ColumnName="AdminPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Holidays">
+            <EntityTypeMapping TypeName="EmpDatabaseModel.Holiday">
+              <MappingFragment StoreEntitySet="Holiday">
+                <ScalarProperty Name="HolidayID" ColumnName="HolidayID" />
+                <ScalarProperty Name="HolidayName" ColumnName="HolidayName" />
+                <ScalarProperty Name="HolidayDate" ColumnName="HolidayDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "_EmpLayout";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Employee Management System", "Index", "Employees", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Employees")</li>
+                    @*<li>@Html.ActionLink("Create", "Create", "Employees")</li>*@
+                    <li>@Html.ActionLink("Grade", "Index", "Grade_master")</li>
+                    <li>@Html.ActionLink("Departments", "Index", "Departments")</li>
+                    <li>@Html.ActionLink("Holidays", "Index", "Holidays")</li>
+                    <li>@Html.ActionLink("Contact Us", "ContactUs", "ContactUs")</li>
+
+
+
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a>Dear - @User.Identity.Name</a></li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                    }
+                </ul>
+
+
+
+
+
+
+
+                @*@using (Html.BeginForm("Search", "Employee", FormMethod.Post, new { id = "searchForm" }))
+                            {
+                                <div class="form-group">
+                                    @Html.Label("SearchTerm", "Search:")
+                                    @Html.TextBox("searchTerm", null, new { @class = "form-control" })
+                                </div>
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            }
+
+                            <div id="searchResults"></div>
+
+                            @section scripts {
+                                <script>
+                    $(function () {
+                        $('#searchForm').submit(function (event) {
+                            event.preventDefault();
+                            var searchTerm = $('#searchTerm').val();
+                            $.ajax({
+                                url: '/Employee/Search',
+                                type: 'POST',
+                                data: { searchTerm: searchTerm },
+                                success: function (data) {
+                                    $('#searchResults').html(data);
+                                }
+                            });
+                        });
+                    });
+                                </script>
+                            }*@
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/CustomJs.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
