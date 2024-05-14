@@ -56,6 +56,7 @@ namespace EMS.Controllers
             {
                 db.Holidays.Add(holiday);
                 db.SaveChanges();
+                TempData["AlertMessage"] = "Holiday Added Successfully....!";
                 return RedirectToAction("Index");
             }
 
@@ -88,6 +89,7 @@ namespace EMS.Controllers
             {
                 db.Entry(holiday).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["AlertMessage"] = "Holiday Updated Successfully....!";
                 return RedirectToAction("Index");
             }
             return View(holiday);
@@ -116,6 +118,7 @@ namespace EMS.Controllers
             Holiday holiday = db.Holidays.Find(id);
             db.Holidays.Remove(holiday);
             db.SaveChanges();
+            TempData["AlertMessage"] = "Holiday Deleted Successfully....!";
             return RedirectToAction("Index");
         }
 

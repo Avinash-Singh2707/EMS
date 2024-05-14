@@ -4,37 +4,93 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Holiday</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.HolidayName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HolidayName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HolidayDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HolidayDate)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+<script>
+    function showAlert(message) {
+        alert(message);
+        window.history.back(); // Redirect to the previous page after displaying the alert
     }
+</script>
+
+<div class="container">
+    @*<h2>Delete</h2>*@
+    <br />
+    <br />
+
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h3 class="panel-title">Are you sure you want to delete this?</h3>
+        </div>
+        <div class="panel-body">
+            <div>
+                <h4>Holiday</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        <label>Holiday ID:</label>
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.HolidayID)
+                    </dd>
+                    <dt>
+                        <label>Holiday Name:</label>
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.HolidayName)
+                    </dd>
+                    <dt>
+                        <label>Holiday Date:</label>
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.HolidayDate)
+                    </dd>
+                </dl>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure to delete Holiday')" /> |
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 </div>
+
+
+@*<h2>Delete</h2>
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Holiday</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.HolidayName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HolidayName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HolidayDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HolidayDate)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>*@

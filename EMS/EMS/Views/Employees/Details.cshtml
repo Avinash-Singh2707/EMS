@@ -180,6 +180,9 @@
     <dl class="details-list">
 
         @*<dt>@Html.DisplayNameFor(model => model.Emp_First_Name)</dt>*@
+        <dt>Employee ID</dt>
+        <dd>@Html.DisplayFor(model => model.Emp_ID)</dd>
+
         <dt>First Name</dt>
         <dd>@Html.DisplayFor(model => model.Emp_First_Name)</dd>
 
@@ -213,8 +216,11 @@
         <dt>Department Name</dt>
         <dd>@Html.DisplayFor(model => model.Department.Dept_Name)</dd>
 
+        <dt>Grade</dt>
+        <dd>@Html.DisplayFor(model => model.Grade_master.Grade_Code)</dd>
+
         @*<dt>@Html.DisplayNameFor(model => model.Grade_master.Description)</dt>
-            <dd>@Html.DisplayFor(model => model.Grade_master.Description)</dd>*@
+        <dd>@Html.DisplayFor(model => model.Grade_master.Description)</dd>*@
     </dl>
 </div>
 

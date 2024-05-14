@@ -69,12 +69,12 @@
         {
             @Html.AntiForgeryToken()
             <div class="form-group">
-                @Html.LabelFor(model => model.AdminId, htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(model => model.AdminId,"Admin ID", htmlAttributes: new { @class = "control-label" })
                 @Html.PasswordFor(model => model.AdminId, new { @class = "form-control", placeholder = "Enter Admin ID", required = "required" })
                 @Html.ValidationMessageFor(model => model.AdminId, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.AdminPassword, htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(model => model.AdminPassword,"Password", htmlAttributes: new { @class = "control-label" })
                 @Html.PasswordFor(model => model.AdminPassword, new { @class = "form-control", placeholder = "Enter Password", required = "required" })
                 @Html.ValidationMessageFor(model => model.AdminPassword, "", new { @class = "text-danger" })
             </div>

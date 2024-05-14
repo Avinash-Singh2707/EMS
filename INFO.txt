@@ -1,0 +1,14 @@
+Webgridextension.cs class -> Added Pagination style parameter so that we can useit with bootstrap.
+for sorting > i have use system.linq.dynamic.
+
+web paging sorting filtering...
+
+I applied search filter on following field 
+ 			     a.Emp_First_Name.Contains(search) ||
+                             a.Emp_Last_Name.Contains(search) ||
+                             a.Emp_Home_Address.Contains(search) ||
+                             a.Emp_Grade.Contains(search) ||
+                             a.Emp_Designation.Contains(search)
+
+
+You can sort any one of field in ascending/descending order

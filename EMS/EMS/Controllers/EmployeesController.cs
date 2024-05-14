@@ -21,7 +21,7 @@ namespace EMS.Controllers
         // GET: Employees
         public ActionResult Index(int page = 1, string sort = "Emp_First_Name", string sortdir = "asc", string search = "")
         {
-            int pageSize = 10;
+            int pageSize = 5;
             int totalRecord = 0;
             if (page < 1) page = 1;
             int skip = (page * pageSize) - pageSize;
