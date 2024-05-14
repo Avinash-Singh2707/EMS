@@ -34,6 +34,7 @@ warning 6002: The table/view 'EmpDatabase.dbo.Admin' does not have a primary key
     <Property Name="Emp_Marital_Status" Type="varchar" MaxLength="20" />
     <Property Name="Emp_Home_Address" Type="varchar" MaxLength="255" />
     <Property Name="Emp_Contact_Num" Type="varchar" MaxLength="15" />
+    <Property Name="Status" Type="varchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="Grade_master">
     <Key>
@@ -44,15 +45,11 @@ warning 6002: The table/view 'EmpDatabase.dbo.Admin' does not have a primary key
     <Property Name="Min_Salary" Type="decimal" Precision="10" Scale="2" Nullable="false" />
     <Property Name="Max_Salary" Type="decimal" Precision="10" Scale="2" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'EmpDatabase.dbo.Holiday' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Holiday">
     <Key>
       <PropertyRef Name="HolidayID" />
-      <PropertyRef Name="HolidayName" />
-      <PropertyRef Name="HolidayDate" />
     </Key>
-    <Property Name="HolidayID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HolidayID" Type="int" Nullable="false" />
     <Property Name="HolidayName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="HolidayDate" Type="date" Nullable="false" />
   </EntityType>
@@ -84,18 +81,12 @@ warning 6002: The table/view 'EmpDatabase.dbo.Holiday' does not have a primary k
     <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Grade_master" EntityType="Self.Grade_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Holiday" EntityType="Self.Holiday" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Admin" EntityType="Self.Admin" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [Admin].[AdminId] AS [AdminId], 
     [Admin].[AdminPassword] AS [AdminPassword]
     FROM [dbo].[Admin] AS [Admin]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="Holiday" EntityType="Self.Holiday" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Holiday].[HolidayID] AS [HolidayID], 
-    [Holiday].[HolidayName] AS [HolidayName], 
-    [Holiday].[HolidayDate] AS [HolidayDate]
-    FROM [dbo].[Holiday] AS [Holiday]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK__Employee__Emp_De__3F466844" Association="Self.FK__Employee__Emp_De__3F466844">
       <End Role="Department" EntitySet="Department" />

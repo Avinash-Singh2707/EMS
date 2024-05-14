@@ -82,6 +82,11 @@ namespace EMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Emp_ID,Emp_First_Name,Emp_Last_Name,Emp_Date_of_Birth,Emp_Date_of_Joining,Emp_Dept_ID,Emp_Grade,Emp_Designation,Emp_Salary,Emp_Gender,Emp_Marital_Status,Emp_Home_Address,Emp_Contact_Num")] Employee employee)
         {
+
+            if (db.Employees.Any(d => d.Emp_ID == employee.Emp_ID ))
+            {
+                ModelState.AddModelError("Emp_ID", "Employee ID already exists.");
+            }
             if (ModelState.IsValid)
             {
                 db.Employees.Add(employee);
@@ -117,17 +122,19 @@ namespace EMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Emp_ID,Emp_First_Name,Emp_Last_Name,Emp_Date_of_Birth,Emp_Date_of_Joining,Emp_Dept_ID,Emp_Grade,Emp_Designation,Emp_Salary,Emp_Gender,Emp_Marital_Status,Emp_Home_Address,Emp_Contact_Num")] Employee employee)
+        public ActionResult Edit([Bind(Include = "Emp_ID,Emp_First_Name,Emp_Last_Name,Emp_Date_of_Birth,Emp_Date_of_Joining,Emp_Dept_ID,Emp_Grade,Emp_Designation,Emp_Salary,Emp_Gender,Emp_Marital_Status,Emp_Home_Address,Emp_Contact_Num,Status")] Employee employee)
         {
             if (ModelState.IsValid)
             {
+                //Employee e = new Employee();
+                //e.Status = "Active";
                 db.Entry(employee).State = EntityState.Modified;
                 db.SaveChanges();
                 TempData["AlertMessage"] = "Employee Updated Successfully....!";
                 return RedirectToAction("Index");
             }
             ViewBag.Emp_Dept_ID = new SelectList(db.Departments, "Dept_ID", "Dept_Name", employee.Emp_Dept_ID);
-            ViewBag.Emp_Grade = new SelectList(db.Grade_master, "Grade_Code", "Grade_Code", employee.Emp_Grade);
+            ViewBag.Emp_Grade = new SelectList(db.Grade_master, "Grade_Code", "Description", employee.Emp_Grade);
             return View(employee);
         }
 
@@ -152,9 +159,34 @@ namespace EMS.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Employee employee = db.Employees.Find(id);
-            db.Employees.Remove(employee);
-            db.SaveChanges();
-            TempData["AlertMessage"] = "Employee Deleted Successfully....!";
+            if (employee != null)
+            {
+                if (employee.Status == "Active")
+                {
+                    employee.Status = "Inactive";
+                    db.SaveChanges();
+                }
+                //else
+                //{
+                //    TempData["AlertMessage"] = "Employee status is already Inactive.";
+                //}
+
+                else if (employee.Status == "Inactive")
+                {
+                    employee.Status = "Active";
+                    db.SaveChanges();
+                }
+                else
+                {
+                    employee.Status = "Inactive";
+                    db.SaveChanges();
+                }
+            }
+            //db.Employees.Remove(employee);
+            //db.SaveChanges();
+            else {
+                TempData["AlertMessage"] = "Employee Deleted Successfully....!";
+            }
             return RedirectToAction("Index");
         }
 

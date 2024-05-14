@@ -11,7 +11,8 @@ namespace EMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Grade_master
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,8 +20,10 @@ namespace EMS.Models
         {
             this.Employees = new HashSet<Employee>();
         }
-    
+
+        [Required(ErrorMessage = "Grade Code is required")]
         public string Grade_Code { get; set; }
+        [Required(ErrorMessage = "Description is required")]
         public string Description { get; set; }
         public decimal Min_Salary { get; set; }
         public decimal Max_Salary { get; set; }

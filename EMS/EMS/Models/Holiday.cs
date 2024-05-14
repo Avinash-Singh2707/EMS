@@ -11,10 +11,12 @@ namespace EMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Holiday
     {
         public int HolidayID { get; set; }
+        [Required(ErrorMessage = "Holiday Name is required")]
         public string HolidayName { get; set; }
         public System.DateTime HolidayDate { get; set; }
     }

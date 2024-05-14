@@ -11,22 +11,39 @@ namespace EMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Employee
     {
         public int Emp_ID { get; set; }
+        [Required(ErrorMessage = "First name is required")]
         public string Emp_First_Name { get; set; }
+        [Required(ErrorMessage = "Last name is required")]
         public string Emp_Last_Name { get; set; }
+        [Required(ErrorMessage = "Date of birth is required")]
+        [AgeRange(18, 58, ErrorMessage = "Employee must be between 18 and 58 years old.")]
         public Nullable<System.DateTime> Emp_Date_of_Birth { get; set; }
+        [Required(ErrorMessage = "Date of joining is required")]
+        [DateOfBirthBeforeJoining(ErrorMessage = "Date of joining must be greater than date of birth.")]
         public Nullable<System.DateTime> Emp_Date_of_Joining { get; set; }
+        [Required(ErrorMessage = "Department ID is required")]
         public Nullable<int> Emp_Dept_ID { get; set; }
+        [Required(ErrorMessage = "Grade is required")]
         public string Emp_Grade { get; set; }
+        [Required(ErrorMessage = "Designation is required")]
         public string Emp_Designation { get; set; }
+        [Required(ErrorMessage = "Salary is required")]
         public Nullable<decimal> Emp_Salary { get; set; }
+        [Required(ErrorMessage = "Gender is required")]
         public string Emp_Gender { get; set; }
+        [Required(ErrorMessage = "Marital status is required")]
         public string Emp_Marital_Status { get; set; }
+        [Required(ErrorMessage = "Home address is required")]
         public string Emp_Home_Address { get; set; }
+        [Required(ErrorMessage = "Contact number is required")]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "Mobile number must be exactly 10 digits.")]
         public string Emp_Contact_Num { get; set; }
+        public string Status { get; set; }
     
         public virtual Department Department { get; set; }
         public virtual Grade_master Grade_master { get; set; }

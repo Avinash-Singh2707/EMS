@@ -2,119 +2,216 @@
 
 @{
     ViewBag.Title = "Delete";
+
 }
 
-<h2>Delete</h2>
+<h2></h2>
+<br />
+<h3>Are you sure you want to Change the Status?</h3>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Employee</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Emp_First_Name)
-        </dt>
+<style>
+    /* Custom CSS for styling */
+    .details-container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Emp_First_Name)
-        </dd>
+    .details-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Emp_Last_Name)
-        </dt>
+        .details-header h2 {
+            font-size: 24px;
+            color: #333;
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.Emp_Last_Name)
-        </dd>
+    .details-list dt {
+        font-weight: bold;
+        color: #555;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Emp_Date_of_Birth)
-        </dt>
+    .details-list dd {
+        margin-left: 0;
+        color: #777;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Emp_Date_of_Birth)
-        </dd>
+    .details-links {
+        text-align: center;
+        margin-top: 20px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Emp_Date_of_Joining)
-        </dt>
+        .details-links a {
+            margin-right: 10px;
+            padding: 8px 20px;
+            color: #fff;
+            background-color: #007bff;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.Emp_Date_of_Joining)
-        </dd>
+            .details-links a:hover {
+                background-color: #0056b3;
+            }
+</style>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Emp_Designation)
-        </dt>
+<h2 class="text-center">Employee Details</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.Emp_Designation)
-        </dd>
+<div class="details-container">
+    <dl class="details-list">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Emp_Salary)
-        </dt>
+        @*<dt>@Html.DisplayNameFor(model => model.Emp_First_Name)</dt>*@
 
-        <dd>
-            @Html.DisplayFor(model => model.Emp_Salary)
-        </dd>
+        <dt>Employee ID</dt>
+        <dd>@Html.DisplayFor(model => model.Emp_ID)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Emp_Gender)
-        </dt>
+        <dt>First Name</dt>
+        <dd>@Html.DisplayFor(model => model.Emp_First_Name)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Emp_Gender)
-        </dd>
+        <dt>Last Name</dt>
+        <dd>@Html.DisplayFor(model => model.Emp_Last_Name)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Emp_Marital_Status)
-        </dt>
+        <dt>Gender</dt>
+        <dd>@Html.DisplayFor(model => model.Emp_Gender)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Emp_Marital_Status)
-        </dd>
+        <dt>Salary</dt>
+        <dd>@Html.DisplayFor(model => model.Emp_Salary)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Emp_Home_Address)
-        </dt>
+        <dt>Grade</dt>
+        <dd>@Html.DisplayFor(model => model.Emp_Grade)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Emp_Home_Address)
-        </dd>
+        <dt>Designation</dt>
+        <dd>@Html.DisplayFor(model => model.Emp_Designation)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Emp_Contact_Num)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Emp_Contact_Num)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Department.Dept_Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Department.Dept_Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Grade_master.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Grade_master.Description)
-        </dd>
 
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
 </div>
+
+@*<div class="text-center details-links">
+    @Html.ActionLink("Change Status", "Delete", new { id = Model.Emp_ID }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-secondary" })
+</div>*@
+
+
+@*<div>
+        <h4>Employee</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_First_Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_First_Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_Last_Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_Last_Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_Date_of_Birth)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_Date_of_Birth)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_Date_of_Joining)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_Date_of_Joining)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_Designation)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_Designation)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_Salary)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_Salary)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_Gender)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_Gender)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_Marital_Status)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_Marital_Status)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_Home_Address)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_Home_Address)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Emp_Contact_Num)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Emp_Contact_Num)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Department.Dept_Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Department.Dept_Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Grade_master.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Grade_master.Description)
+            </dd>
+
+        </dl>*@
+
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Change Status" class="btn btn-primary" /> |
+                @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-primary" })
+            </div>
+        }
+    @*</div>*@
+
+
+

@@ -12,6 +12,7 @@
     <EntitySetMapping Name="Employees">
       <EntityTypeMapping TypeName="EmpDatabaseModel.Employee">
         <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Emp_ID" ColumnName="Emp_ID" />
           <ScalarProperty Name="Emp_First_Name" ColumnName="Emp_First_Name" />
           <ScalarProperty Name="Emp_Last_Name" ColumnName="Emp_Last_Name" />
@@ -49,9 +50,9 @@
     <EntitySetMapping Name="Holidays">
       <EntityTypeMapping TypeName="EmpDatabaseModel.Holiday">
         <MappingFragment StoreEntitySet="Holiday">
-          <ScalarProperty Name="HolidayID" ColumnName="HolidayID" />
-          <ScalarProperty Name="HolidayName" ColumnName="HolidayName" />
           <ScalarProperty Name="HolidayDate" ColumnName="HolidayDate" />
+          <ScalarProperty Name="HolidayName" ColumnName="HolidayName" />
+          <ScalarProperty Name="HolidayID" ColumnName="HolidayID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

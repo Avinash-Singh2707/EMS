@@ -11,6 +11,22 @@
     <h4>Holiday</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HolidayName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HolidayName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HolidayDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HolidayDate)
+        </dd>
+
     </dl>
 
     @using (Html.BeginForm()) {

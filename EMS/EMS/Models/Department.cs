@@ -11,7 +11,8 @@ namespace EMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Department
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,8 +20,10 @@ namespace EMS.Models
         {
             this.Employees = new HashSet<Employee>();
         }
-    
+
+        [Required(ErrorMessage = "Departmen ID is required")]
         public int Dept_ID { get; set; }
+        [Required(ErrorMessage = "Department is required")]
         public string Dept_Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

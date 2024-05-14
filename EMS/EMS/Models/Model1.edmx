@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EmpDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EmpDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'EmpDatabase.dbo.Admin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Admin">
@@ -39,6 +39,7 @@ warning 6002: The table/view 'EmpDatabase.dbo.Admin' does not have a primary key
           <Property Name="Emp_Marital_Status" Type="varchar" MaxLength="20" />
           <Property Name="Emp_Home_Address" Type="varchar" MaxLength="255" />
           <Property Name="Emp_Contact_Num" Type="varchar" MaxLength="15" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Grade_master">
           <Key>
@@ -49,15 +50,11 @@ warning 6002: The table/view 'EmpDatabase.dbo.Admin' does not have a primary key
           <Property Name="Min_Salary" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Max_Salary" Type="decimal" Precision="10" Scale="2" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'EmpDatabase.dbo.Holiday' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Holiday">
           <Key>
             <PropertyRef Name="HolidayID" />
-            <PropertyRef Name="HolidayName" />
-            <PropertyRef Name="HolidayDate" />
           </Key>
-          <Property Name="HolidayID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HolidayID" Type="int" Nullable="false" />
           <Property Name="HolidayName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="HolidayDate" Type="date" Nullable="false" />
         </EntityType>
@@ -89,18 +86,12 @@ warning 6002: The table/view 'EmpDatabase.dbo.Holiday' does not have a primary k
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grade_master" EntityType="Self.Grade_master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Holiday" EntityType="Self.Holiday" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admin" EntityType="Self.Admin" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Admin].[AdminId] AS [AdminId], 
     [Admin].[AdminPassword] AS [AdminPassword]
     FROM [dbo].[Admin] AS [Admin]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Holiday" EntityType="Self.Holiday" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Holiday].[HolidayID] AS [HolidayID], 
-    [Holiday].[HolidayName] AS [HolidayName], 
-    [Holiday].[HolidayDate] AS [HolidayDate]
-    FROM [dbo].[Holiday] AS [Holiday]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__Employee__Emp_De__3F466844" Association="Self.FK__Employee__Emp_De__3F466844">
             <End Role="Department" EntitySet="Department" />
@@ -111,8 +102,7 @@ warning 6002: The table/view 'EmpDatabase.dbo.Holiday' does not have a primary k
             <End Role="Employee" EntitySet="Employee" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EmpDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -143,6 +133,7 @@ warning 6002: The table/view 'EmpDatabase.dbo.Holiday' does not have a primary k
           <Property Name="Emp_Contact_Num" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Department" Relationship="Self.FK__Employee__Emp_De__3F466844" FromRole="Employee" ToRole="Department" />
           <NavigationProperty Name="Grade_master" Relationship="Self.FK__Employee__Emp_Gr__403A8C7D" FromRole="Employee" ToRole="Grade_master" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Grade_master">
           <Key>
@@ -161,16 +152,6 @@ warning 6002: The table/view 'EmpDatabase.dbo.Holiday' does not have a primary k
           </Key>
           <Property Name="AdminId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="AdminPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Holiday">
-          <Key>
-            <PropertyRef Name="HolidayID" />
-            <PropertyRef Name="HolidayName" />
-            <PropertyRef Name="HolidayDate" />
-          </Key>
-          <Property Name="HolidayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="HolidayName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="HolidayDate" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <Association Name="FK__Employee__Emp_De__3F466844">
           <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
@@ -201,7 +182,6 @@ warning 6002: The table/view 'EmpDatabase.dbo.Holiday' does not have a primary k
           <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="Grade_master" EntityType="Self.Grade_master" />
           <EntitySet Name="Admins" EntityType="Self.Admin" />
-          <EntitySet Name="Holidays" EntityType="Self.Holiday" />
           <AssociationSet Name="FK__Employee__Emp_De__3F466844" Association="Self.FK__Employee__Emp_De__3F466844">
             <End Role="Department" EntitySet="Departments" />
             <End Role="Employee" EntitySet="Employees" />
@@ -210,7 +190,16 @@ warning 6002: The table/view 'EmpDatabase.dbo.Holiday' does not have a primary k
             <End Role="Grade_master" EntitySet="Grade_master" />
             <End Role="Employee" EntitySet="Employees" />
           </AssociationSet>
+          <EntitySet Name="Holidays" EntityType="EmpDatabaseModel.Holiday" />
         </EntityContainer>
+        <EntityType Name="Holiday">
+          <Key>
+            <PropertyRef Name="HolidayID" />
+          </Key>
+          <Property Name="HolidayID" Type="Int32" Nullable="false" />
+          <Property Name="HolidayName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="HolidayDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -228,6 +217,7 @@ warning 6002: The table/view 'EmpDatabase.dbo.Holiday' does not have a primary k
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="EmpDatabaseModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Emp_ID" ColumnName="Emp_ID" />
                 <ScalarProperty Name="Emp_First_Name" ColumnName="Emp_First_Name" />
                 <ScalarProperty Name="Emp_Last_Name" ColumnName="Emp_Last_Name" />
@@ -265,9 +255,9 @@ warning 6002: The table/view 'EmpDatabase.dbo.Holiday' does not have a primary k
           <EntitySetMapping Name="Holidays">
             <EntityTypeMapping TypeName="EmpDatabaseModel.Holiday">
               <MappingFragment StoreEntitySet="Holiday">
-                <ScalarProperty Name="HolidayID" ColumnName="HolidayID" />
-                <ScalarProperty Name="HolidayName" ColumnName="HolidayName" />
                 <ScalarProperty Name="HolidayDate" ColumnName="HolidayDate" />
+                <ScalarProperty Name="HolidayName" ColumnName="HolidayName" />
+                <ScalarProperty Name="HolidayID" ColumnName="HolidayID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -48,6 +48,10 @@ namespace EMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "HolidayID,HolidayName,HolidayDate")] Holiday holiday)
         {
+            if (db.Holidays.Any(d => d.HolidayID == holiday.HolidayID))
+            {
+                ModelState.AddModelError("HolidayID", "Holiday ID already exists.");
+            }
             if (ModelState.IsValid)
             {
                 db.Holidays.Add(holiday);

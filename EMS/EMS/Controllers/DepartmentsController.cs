@@ -48,10 +48,15 @@ namespace EMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Dept_ID,Dept_Name")] Department department)
         {
+            if (db.Departments.Any(d => d.Dept_ID == department.Dept_ID))
+            {
+                ModelState.AddModelError("Dept_ID", "Department ID already exists.");
+            }
             if (ModelState.IsValid)
             {
                 db.Departments.Add(department);
                 db.SaveChanges();
+                TempData["AlertMessage"] = "Department Added Successfully....!";
                 return RedirectToAction("Index");
             }
 
@@ -84,6 +89,7 @@ namespace EMS.Controllers
             {
                 db.Entry(department).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["AlertMessage"] = "Department Updated Successfully....!";
                 return RedirectToAction("Index");
             }
             return View(department);
@@ -107,13 +113,48 @@ namespace EMS.Controllers
         // POST: Departments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+
         public ActionResult DeleteConfirmed(int id)
         {
-            Department department = db.Departments.Find(id);
-            db.Departments.Remove(department);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                Department department = db.Departments.Find(id);
+
+                // Check if the department has any dependencies
+                if (HasDependencies(department))
+                {
+                    string alertMessage = "Cannot delete the department because it has dependencies.";
+                    return Content($"<script>alert('{alertMessage}'); window.location.href = '/Departments/Index';</script>");
+                }
+
+                // If there are no dependencies, proceed with deletion
+                db.Departments.Remove(department);
+                db.SaveChanges();
+                TempData["AlertMessage"] = "Department Deleted Successfully....!";
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(string.Empty, "An error occurred while deleting the department.");
+                return View();
+            }
         }
+
+        // Method to check if the department has dependencies
+        private bool HasDependencies(Department department)
+        {
+            // Check if the department is associated with any other entities
+            // For example, you can check if there are any employees belonging to this department
+            return db.Employees.Any(e => e.Emp_Dept_ID == department.Dept_ID);
+        }
+
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Department department = db.Departments.Find(id);
+        //    db.Departments.Remove(department);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

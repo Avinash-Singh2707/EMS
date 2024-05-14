@@ -20,9 +20,12 @@ CREATE TABLE Employee (
 	FOREIGN KEY (Emp_Grade) REFERENCES GRADE_MASTER(GRADE_CODE)
 );
 
-Alter table Employee Add IsActive varchar(20)
- 
+Alter table Employee Add Status varchar(20) default 'Active';
+
+delete from Employee
 select * from Employee
+UPDATE Employee
+SET Status = 'Active';
 
 CREATE TABLE Department (
     Dept_ID INT PRIMARY KEY,
@@ -30,6 +33,7 @@ CREATE TABLE Department (
 );
  select * from Department
  select * from Grade_Master
+ select * from Employee
 CREATE TABLE Admin (
     AdminId VARCHAR(50) not null,
     AdminPassword VARCHAR(50) not null,
@@ -45,13 +49,23 @@ CREATE TABLE Grade_master (
     Min_Salary DECIMAL(10,2) not null,
     Max_Salary DECIMAL(10,2) not null
 );
+select * from Grade_master;
 
 CREATE TABLE Holiday (
-    HolidayID INT IDENTITY,
+    HolidayID INT Primary key,
     HolidayName VARCHAR(100) NOT NULL,
     HolidayDate DATE NOT NULL
 );
 
+
+select * from Holiday
+
+INSERT INTO Holiday VALUES (1,'New Year', '2024-01-01');
+INSERT INTO Holiday VALUES (2,'Independence Day', '2024-07-04');
+
+INSERT INTO Holiday VALUES (3,'Christmas Day', '2024-12-25');
+
+drop table Holiday
 
 
 

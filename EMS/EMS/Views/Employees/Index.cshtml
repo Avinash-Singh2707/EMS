@@ -158,31 +158,51 @@
         </p>
         <div>
             @grid.Table(
-                tableStyle: "table table-responsive table-bordered",
-                columns: grid.Columns(
-                     grid.Column(columnName: "Emp_ID", header: "EID"),
-                    grid.Column(columnName: "Emp_First_Name", header: "First Name"),
-                    grid.Column(columnName: "Emp_Last_Name", header: "Last Name"),
-                    grid.Column(columnName: "Emp_Date_of_Birth", header: "DOB", format: (item) => item.Emp_Date_of_Birth.ToString("dd-MM-yyyy")),
-                    grid.Column(columnName: "Emp_Date_of_Joining", header: "DOJ", format: (item) => item.Emp_Date_of_Joining.ToString("dd-MM-yyyy")),
-                    //grid.Column(columnName: "Emp_Grade", header: "DepartmentID"),
-                    grid.Column(columnName: "Emp_Designation", header: "Designation"),
-                    grid.Column(columnName: "Emp_Salary", header: "Salary"),
-                    grid.Column(columnName: "Emp_Gender", header: "Gender"),
-                    //grid.Column(columnName: "Emp_Marital_Status", header: "Martial-Status"),
-                    grid.Column(columnName: "Emp_Home_Address", header: "Address"),
-                    grid.Column(columnName: "Emp_Contact_Num", header: "Mobile-Number"),
-
-                     grid.Column(header: "Actions", format: @<text>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Emp_ID }, new { @class = "btn btn-primary" })
-                            <text> | </text>
-                            @Html.ActionLink("Details", "Details", new { id = item.Emp_ID }, new { @class = "btn btn-info" })
-                            <text> | </text>
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Emp_ID }, new { @class = "btn btn-danger" })
-                    </text>)
+         tableStyle: "table table-responsive table-bordered",
+         columns: grid.Columns(
+              grid.Column(columnName: "Emp_ID", header: "EID"),
+             grid.Column(columnName: "Emp_First_Name", header: "First Name"),
+             grid.Column(columnName: "Emp_Last_Name", header: "Last Name"),
+             grid.Column(columnName: "Emp_Date_of_Birth", header: "DOB", format: (item) => item.Emp_Date_of_Birth.ToString("dd-MM-yyyy")),
+             grid.Column(columnName: "Emp_Date_of_Joining", header: "DOJ", format: (item) => item.Emp_Date_of_Joining.ToString("dd-MM-yyyy")),
+             //grid.Column(columnName: "Emp_Grade", header: "DepartmentID"),
+             grid.Column(columnName: "Emp_Designation", header: "Designation"),
+             grid.Column(columnName: "Emp_Salary", header: "Salary"),
+             grid.Column(columnName: "Emp_Gender", header: "Gender"),
+             //grid.Column(columnName: "Emp_Marital_Status", header: "Martial-Status"),
+             grid.Column(columnName: "Emp_Home_Address", header: "Address"),
+             //grid.Column(columnName: "Emp_Contact_Num", header: "Mobile-Number"),
+             //grid.Column(columnName: "Status", header: "Status"),
 
 
-  )
+            grid.Column(columnName: "Status", header: "Status", format: @<text>
+                    @if ((string)item.Status == "Active")
+                         {
+                        <button class="btn btn-success">Active</button>
+                         }
+                    else if ((string)item.Status=="Inactive")
+                    {
+                       <button class="btn btn-danger">Inactive</button>
+                    }
+                else
+                {
+                             <button class="btn btn-success">Active</button>
+                }
+            </text>),
+
+
+
+
+                                       grid.Column(header: "Actions", format: @<text>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Emp_ID }, new { @class = "btn btn-primary" })
+                                    <text> | </text>
+                                    @Html.ActionLink("Details", "Details", new { id = item.Emp_ID }, new { @class = "btn btn-info" })
+                                    <text> | </text>
+                                    @Html.ActionLink("Change Status", "Delete", new { id = item.Emp_ID }, new { @class = "btn btn-danger" })
+                                    </text>)
+
+
+)
 
 
 )

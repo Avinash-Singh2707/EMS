@@ -78,8 +78,8 @@ D:\New folder\EMS\EMS\bin\System.Web.WebPages.Razor.xml
 D:\New folder\EMS\EMS\bin\Newtonsoft.Json.xml
 D:\New folder\EMS\EMS\bin\Antlr3.Runtime.pdb
 D:\New folder\EMS\EMS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\New folder\EMS\EMS\obj\Debug\EMS.csproj.AssemblyReference.cache
 D:\New folder\EMS\EMS\obj\Debug\EMS.csproj.CoreCompileInputs.cache
 D:\New folder\EMS\EMS\obj\Debug\EMS.csproj.CopyComplete
 D:\New folder\EMS\EMS\obj\Debug\EMS.dll
 D:\New folder\EMS\EMS\obj\Debug\EMS.pdb
+D:\New folder\EMS\EMS\obj\Debug\EMS.csproj.AssemblyReference.cache
